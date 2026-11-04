@@ -16,3 +16,4 @@ MonoBehaviour:
   avatarUrl: https://picsum.photos/200
   requestTimeout: 5
   avatarCount: 5
+  batchSize: 30

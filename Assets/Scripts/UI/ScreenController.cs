@@ -29,11 +29,11 @@ namespace UI
             CloseProfile();
         }
 
-        public void Init(AccountService accountService, PicsService picsService, UIConfig uiConfig)
+        public void Init(AccountService accountService, PicsService picsService, UIConfig uiConfig, AppConfig appConfig)
         {
             profileWindow.Init(accountService, picsService, CloseProfile, uiConfig);
-            mainWindow.Init(accountService, picsService, OpenProfile, uiConfig);
-            favouritesWindow.Init(accountService, picsService, OpenProfile, uiConfig);
+            mainWindow.Init(accountService, picsService, OpenProfile, uiConfig, appConfig);
+            favouritesWindow.Init(accountService, picsService, OpenProfile, uiConfig, appConfig);
             
             OpenScreen(mainWindow);
         }
@@ -45,6 +45,9 @@ namespace UI
 
             mainWindow.gameObject.SetActive(window == mainWindow);
             favouritesWindow.gameObject.SetActive(window == favouritesWindow);
+
+            mainImage.sprite = window == mainWindow ? footerSpriteOn : footerSpriteOff;
+            favouritesImage.sprite = window == favouritesWindow ? footerSpriteOn : footerSpriteOff;
         }
 
         private void OpenProfile(int accountId)

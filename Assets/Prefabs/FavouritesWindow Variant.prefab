@@ -12,9 +12,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: FavouritesWindow Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2506843699471480348, guid: 03b9f4f3a1691d2448272bda68ebe33a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3834533486415761990, guid: 03b9f4f3a1691d2448272bda68ebe33a, type: 3}
       propertyPath: m_text
       value: '|   Favourite   |'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327153774437981733, guid: 03b9f4f3a1691d2448272bda68ebe33a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327153774437981733, guid: 03b9f4f3a1691d2448272bda68ebe33a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327153774437981733, guid: 03b9f4f3a1691d2448272bda68ebe33a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1110.487
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327153774437981733, guid: 03b9f4f3a1691d2448272bda68ebe33a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 560.2435
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327153774437981733, guid: 03b9f4f3a1691d2448272bda68ebe33a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -65.35755
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140743717601340452, guid: 03b9f4f3a1691d2448272bda68ebe33a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8619932983748462423, guid: 03b9f4f3a1691d2448272bda68ebe33a, type: 3}
       propertyPath: m_Sprite
@@ -126,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9530aac1ecd0744d8fa3d4b38f01618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listView: {fileID: 8395767924233393458}
+  scrollView: {fileID: 8395767924233393458}
 --- !u!114 &8395767924233393458 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7997974328804632589, guid: 03b9f4f3a1691d2448272bda68ebe33a, type: 3}

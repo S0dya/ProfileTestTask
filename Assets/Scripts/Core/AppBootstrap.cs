@@ -15,6 +15,7 @@ namespace Core
         [SerializeField] private ScreenController screenController;
 
         private readonly CancellationTokenSource _lifetime = new();
+        
         private JsonSaveService _saveService;
         private AccountService _accountService;
         private HttpService _httpService;
@@ -22,6 +23,8 @@ namespace Core
 
         private async void Start()
         {
+            Application.targetFrameRate = 60;
+            
             var token = _lifetime.Token;
 
             try
@@ -39,7 +42,7 @@ namespace Core
 
                 await _picsService.Init(token);
                 token.ThrowIfCancellationRequested();
-                screenController.Init(_accountService, _picsService, uiConfig);
+                screenController.Init(_accountService, _picsService, uiConfig, appConfig);
             }
             catch (Exception exception)
             {

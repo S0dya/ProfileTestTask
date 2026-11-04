@@ -10,10 +10,15 @@ namespace Configs
         [Space]
         [SerializeField] private int requestTimeout;
         [SerializeField] private int avatarCount;
+        [Space]
+        [SerializeField] private int batchSize = 20;
 
         public string AccountsUrl => accountsUrl;
         public string AvatarUrl => avatarUrl;
+        
         public int RequestTimeout => requestTimeout;
         public int AvatarCount => avatarCount;
+        
+        public int BatchSize => batchSize;
     }
 }

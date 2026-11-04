@@ -17,6 +17,7 @@ namespace UI
         [SerializeField] private Image favouriteIcon;
         [Space]
         [SerializeField] private Button profileButton;
+        [SerializeField] private Image background;
 
         private UIConfig _uiConfig;
         
@@ -51,6 +52,11 @@ namespace UI
         public void SetFavourite(bool value)
         {
             favouriteIcon.sprite = value ? _uiConfig.FavouriteOn : _uiConfig.FavouriteOff;
+        }
+
+        public void SetBackground(bool isAlternative)
+        {
+            background.enabled = isAlternative;
         }
 
         private void OnFavouriteClicked() => _onFavourite?.Invoke(_accountId);
