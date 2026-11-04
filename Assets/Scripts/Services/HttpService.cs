@@ -6,7 +6,7 @@ using Configs;
 
 namespace Services
 {
-    public class HttpService
+    public class HttpService : IDisposable
     {
         private readonly HttpClient _httpClient;
 
@@ -23,7 +23,14 @@ namespace Services
             using var response = await _httpClient.GetAsync(url, cancellationToken);
             response.EnsureSuccessStatusCode();
             
-            return await response.Content.ReadAsByteArrayAsync();
+            var bytes = await response.Content.ReadAsByteArrayAsync();
+            cancellationToken.ThrowIfCancellationRequested();
+            return bytes;
+        }
+        
+        public void Dispose()
+        {
+            _httpClient.Dispose();
         }
     }
 }

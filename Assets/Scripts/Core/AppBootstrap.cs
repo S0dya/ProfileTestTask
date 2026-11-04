@@ -68,6 +68,7 @@ namespace Core
         private void OnDestroy()
         {
             _lifetime.Cancel();
+            _httpService?.Dispose();
             _lifetime.Dispose();
         }
     }

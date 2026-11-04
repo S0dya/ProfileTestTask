@@ -4,7 +4,6 @@ using System.Linq;
 using Configs;
 using Core;
 using Models;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Services
@@ -22,13 +21,17 @@ namespace Services
         {
             _saveService = saveService;
             
+            if (appConfig.AvatarCount < 2)
+                throw new ArgumentOutOfRangeException(nameof(appConfig), "At least two avatars are required.");
+
+            var statesById = savedState.accounts.ToDictionary(x => x.id);
             int previousAvatarIndex = -1;
 
             foreach (var accountData in accounts)
             {
-                var accountState = GetOrCreateState(accountData, savedState);
+                var accountState = GetOrCreateState(accountData, statesById);
                 
-                if (accountState.avatarIndex < 0)
+                if (accountState.avatarIndex < 0 || accountState.avatarIndex >= appConfig.AvatarCount)
                 {
                     do
                     {
@@ -43,12 +46,15 @@ namespace Services
                 _accountsById.Add(accountData.id, account);
                 Accounts.Add(account);
             }
+
+            Save();
         }
         
         public void ToggleFavourite(int id)
         {
             var state = _accountsById[id].State;
             state.isFavourite = !state.isFavourite;
+            Save();
             FavouriteChanged?.Invoke(id, state.isFavourite);
         }
         
@@ -66,17 +72,15 @@ namespace Services
             });
         }
 
-        private AccountState GetOrCreateState(AccountData accountData, AccountsState savedState)
+        private AccountState GetOrCreateState(AccountData accountData, Dictionary<int, AccountState> statesById)
         {
-            var accountState = savedState.accounts.FirstOrDefault(x => x.id == accountData.id);
-            
-            if (accountState == null)
+            if (!statesById.TryGetValue(accountData.id, out var accountState))
             {
                 accountState = new AccountState
                 {
                     id = accountData.id
                 };
-                savedState.accounts.Add(accountState);
+                statesById.Add(accountData.id, accountState);
             }
             
             return accountState;

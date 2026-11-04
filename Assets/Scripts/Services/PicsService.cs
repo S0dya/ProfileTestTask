@@ -12,6 +12,7 @@ namespace Services
     {
         private readonly AppConfig _appConfig;
         private readonly HttpService _httpService;
+        
         private readonly Sprite[] _avatars;
         private readonly string _avatarsPath;
 
@@ -19,6 +20,7 @@ namespace Services
         {
             _appConfig = appConfig;
             _httpService = httpService;
+            
             _avatars = new Sprite[appConfig.AvatarCount];
             _avatarsPath = Path.Combine(Application.persistentDataPath, StorageKeys.StorageFolder, StorageKeys.AvatarsFolder);
         }
@@ -34,6 +36,10 @@ namespace Services
                 try
                 {
                     _avatars[i] = await LoadAvatar(i, token);
+                }
+                catch (OperationCanceledException) when (token.IsCancellationRequested)
+                {
+                    throw;
                 }
                 catch (Exception e)
                 {

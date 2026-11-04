@@ -23,6 +23,7 @@ namespace UI
         
         private Action _onLoadMore;
         private bool _isLoadingMore;
+        private bool _hasMore = true;
 
         public void Init(Action<int> onFavourite, Action<int> onProfile, UIConfig uiConfig, Action onLoadMore = null)
         {
@@ -50,17 +51,15 @@ namespace UI
 
         private void Update()
         {
-            if (_isLoadingMore) return;
+            if (_isLoadingMore || !_hasMore) return;
             if (!scrollRect || !scrollRect.content) return;
 
             var contentHeight = scrollRect.content.rect.height;
             var viewportHeight = scrollRect.viewport.rect.height;
             
-            if (contentHeight <= viewportHeight) return;
+            var currentBottomY = scrollRect.content.anchoredPosition.y + viewportHeight;
 
-            var currentBottomY = scrollRect.content.anchoredPosition.y + scrollRect.viewport.rect.height;
-
-            if (currentBottomY > contentHeight + scrollLoadOffset)
+            if (currentBottomY >= contentHeight - scrollLoadOffset)
             {
                 OnTryLoadMore();
             }
@@ -98,8 +97,9 @@ namespace UI
                 _orderedCards[i].SetBackground(i % 2 == 1);
         }
 
-        public void StopLoading()
+        public void StopLoading(bool hasMore)
         {
+            _hasMore = hasMore;
             _isLoadingMore = false;
         }
 
