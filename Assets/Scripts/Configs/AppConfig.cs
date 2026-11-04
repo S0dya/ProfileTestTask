@@ -1,0 +1,19 @@
+using UnityEngine;
+
+namespace Configs
+{
+    [CreateAssetMenu(fileName = "AppConfig", menuName = "ProfileTestTask/App Config")]
+    public class AppConfig : ScriptableObject
+    {
+        [SerializeField] private string accountsUrl;
+        [SerializeField] private string avatarUrl;
+        [Space]
+        [SerializeField] private int requestTimeout;
+        [SerializeField] private int avatarCount;
+
+        public string AccountsUrl => accountsUrl;
+        public string AvatarUrl => avatarUrl;
+        public int RequestTimeout => requestTimeout;
+        public int AvatarCount => avatarCount;
+    }
+}
