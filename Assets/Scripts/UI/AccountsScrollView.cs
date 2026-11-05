@@ -94,7 +94,7 @@ namespace UI
         public void Refresh()
         {
             for (int i = 0; i < _orderedCards.Count; i++)
-                _orderedCards[i].SetBackground(i % 2 == 1);
+                _orderedCards[i].SetBackground(i % 2 == 0);
         }
 
         public void StopLoading(bool hasMore)
